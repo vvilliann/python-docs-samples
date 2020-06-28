@@ -22,12 +22,12 @@ app = Flask(__name__)
 
 
 @app.route('/yin')
-def hello():
+def hellomaster():
     """Return a friendly HTTP greeting."""
     return 'Hello Master!'
 
 @app.route('/other')
-def hello():
+def helloguys():
     """Return a friendly HTTP greeting."""
     return 'Hello Guys!'
 
