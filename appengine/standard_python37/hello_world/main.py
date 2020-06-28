@@ -21,11 +21,15 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/yin')
 def hello():
     """Return a friendly HTTP greeting."""
-    return 'Hello World!'
+    return 'Hello Master!'
 
+@app.route('/other')
+def hello():
+    """Return a friendly HTTP greeting."""
+    return 'Hello Guys!'
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
