@@ -105,7 +105,7 @@ def registeruser(username, nickname, room):
 def registerroom(username, nickname, room, config):
     """Returns whether room is available."""
     usertable[username] = nickname
-    if (roommembertable.contains_key(room) && roomstatus[room] == "in game"):
+    if (roommembertable.contains_key(room) and roomstatus[room] == "in game"):
         return "room " + room + " is not available!"
     roommembertable[room] = {}
     roommembertable[room].add(username)
