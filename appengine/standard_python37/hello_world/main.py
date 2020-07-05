@@ -110,6 +110,7 @@ def registerroom(username, nickname, room, config):
     roommembertable[room] = set()
     roommembertable[room].add(username)
     roomstatus[room] = "available"
+    configtable[room] = config
     return "room " + room + " registered"
     
 @app.route('/startgame/<username>/<room>')
