@@ -83,6 +83,11 @@ acts = {
     "reserved": {0: dict()}
 }
 
+# Lancelot cards
+lancelotcards = {
+    "reserved": "1000100"
+}
+
 @app.route('/yin')
 def hellomaster():
     """Returns a friendly HTTP greeting."""
@@ -154,6 +159,17 @@ def startgame(username, room):
         proposals[room] = dict()
         votes[room] = dict()
         acts[room] = dict()
+        # Initialize lancelot cards
+        lancelotcard = "1100000"
+        shufflecount = 20
+        while (shufflecount > 0):
+            shuffleindex1 = random.randint(0, 6)
+            shuffleindex2 = random.randint(0, 6)
+            temp = lancelotcard[shuffleindex1]
+            lancelotcard[shuffleindex1] = lancelotcard[shuffleindex2]
+            lancelotcard[shuffleindex2] = temp
+            shufflecount = shufflecount - 1
+        lancelotcards[room] = lancelotcard
     return generatecurrentinfo(room)
 
 @app.route('/getgameinfo/<username>/<room>')
@@ -221,6 +237,20 @@ def nexturn(username, room, turn):
     currturn[room] = turn
     return "Now on turn " + turn
     
+@app.route('/killmerlin/<username>/<room>/<merlin>')
+def killmerlin(username, room, merlin):
+    """Chooses a player, kill him, if he/she is merlin, the assassin succeeds. Note here merlin is index."""
+    roomstatus[room] = "finished"
+    if roomidentitytable[room][merlin] == 'M':
+        return "Assassin succeeds!"
+    else:
+        return "Assassin fails!"
+    
+@app.route('/getlancelotcards/<room>')
+def getlancelotcards(room):
+    """Gets Lancelot cards, reveal if they are switched or not."""
+    return lancelotcards[room]
+
 def printnamelist(namelist):
     """Given a list of name, return a single string with | as spliter."""
     outputstr = ""
