@@ -175,7 +175,7 @@ def loadproposal(username, room):
     return printnamelist(indexlist)
 
 @app.route('/voteproposal/<username>/<room>/<vote>')
-def voteproposal(username, room, vote)
+def voteproposal(username, room, vote):
     if not (votes[room].contains_key([currturn[room]])):
         votes[room][currturn[room]] = dict()
     votes[room][currturn[room]][username] = vote
