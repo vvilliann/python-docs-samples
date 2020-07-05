@@ -110,6 +110,7 @@ def registerroom(username, nickname, room, config):
     roommembertable[room] = set()
     roommembertable[room].add(username)
     roomstatus[room] = "available"
+    return "room " + room + " registered"
     
 @app.route('/startgame/<username>/<room>')
 def startgame(username, room):
@@ -191,6 +192,7 @@ def act(username, room, action):
     if not (currturn[room] in acts[room]):
         acts[room][currturn[room]] = dict()
     acts[room][currturn[room]][username] = action
+    return "action made!"
 
 @app.route('/loadacts/<username>/<room>')
 def loadacts(username, room):
