@@ -125,7 +125,7 @@ def startgame(username, room):
             randindex = random.randint(0, currsize - 1)
             roomuserlisttable[room].append(userlist[randindex])
             userlist.remove(userlist[randindex])
-            currsize--
+            currsize = currsize - 1
         # Initialize the identity
         currsize = len(configtable[room]) - 1
         configstr = configtable[room]
@@ -134,7 +134,7 @@ def startgame(username, room):
             randindex = random.randint(0, currsize - 1)
             roomidentitytable[room] = roomuserlisttable[room] + configstr[randindex]
             configstr.replace(configstr[randindex], '')
-            currsize--
+            currsize = currsize - 1
         # Initialize the turn counter
         currturn[room] = 1
         # Initialize the lake lady
