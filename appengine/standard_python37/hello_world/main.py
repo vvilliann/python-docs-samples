@@ -20,26 +20,32 @@ import random
 # called `app` in `main.py`.
 app = Flask(__name__)
 
+# Players as a set in each room
 roommembertable = {
     "reserved": set()
 }
 
+# Identities as a list in each room
 roomidentitytable = {
     "reserved": []
 }
 
+# Users as a list in each room
 roomuserlisttable = {
     "reserved": []
 }
 
+# Turn counters
 currturn = {
     "reserved": 0
 }
 
+# Lake lady pointer
 currlady = {
     "reserved": "someuser"
 }
 
+# Username -> nickname dictionary
 usertable = {
     "defaultusername": "defaultname"
 }
@@ -52,6 +58,7 @@ usertable = {
 # W: Liang Chao Wei - he is a good people, can only vote fail. He knows Merlin and Merlin knows him.
 # K: last bit, if K means we have lake lady, if it is k it means we don't have lake lady.
 
+# Configuration records for different rooms
 configtable = {
     "reserved": "OMPAYYG"
 }
@@ -61,35 +68,34 @@ roomstatus = {
     "reserved": "available"
 }
 
+# Proposal records
 proposals = {
     "reserved": {0 : set()}
 }
 
+# Votes records
 votes = {
-    "reserved": {0 : dict(), 1 : dict(), 2 : dict(), 3 : dict(), 4 : dict(),
-                 5 : dict(), 6 : dict(), 7 : dict(), 8 : dict(), 9 : dict(),
-                 10 : dict(), 11 : dict(), 12 : dict(), 13 : dict(), 14 : dict(),
-                 15 : dict(), 16 : dict(), 17 : dict(), 18 : dict(), 19 : dict(),
-                 20 : dict(), 21 : dict(), 22 : dict(), 23 : dict(), 24 : dict(), 25 : dict()}
+    "reserved": {0 : dict()}
 }
 
+# Action records
 acts = {
-    "reserved": {0: dict(), 1 : dict(), 2 : dict(), 3 : dict(), 4 : dict(), 5 : dict()}
+    "reserved": {0: dict()}
 }
 
 @app.route('/yin')
 def hellomaster():
-    """Return a friendly HTTP greeting."""
+    """Returns a friendly HTTP greeting."""
     return "Hello Master!"
 
 @app.route('/other')
 def helloguys():
-    """Return a friendly HTTP greeting."""
+    """Returns a friendly HTTP greeting."""
     return "Hello Guys!"
 
 @app.route('/registeruser/<username>/<nickname>/<room>')
 def registeruser(username, nickname, room):
-    """Return an existing room information."""
+    """Returns an existing room information."""
     usertable[username] = nickname
     if (room in roommembertable):
         if (len(roommembertable[room]) == len(configtable[room]) - 1):
@@ -152,10 +158,12 @@ def startgame(username, room):
 
 @app.route('/getgameinfo/<username>/<room>')
 def getgameinfo(username, room):
+    """Returns current game info in this room."""
     return generatecurrentinfo(room)
 
 @app.route('/propose/<username>/<room>/<index1>/<index2>/<index3>/<index4>/<index5>/<index6>/<index7>')
 def propose(username, room, index1, index2, index3, index4, index5, index6, index7):
+    """Proposes a team for next action."""
     proposed[room][currturn[room]] = set()
     proposed[room][currturn[room]].add(index1)
     proposed[room][currturn[room]].add(index2)
@@ -173,11 +181,13 @@ def propose(username, room, index1, index2, index3, index4, index5, index6, inde
 
 @app.route('/loadproposal/<username>/<room>')
 def loadproposal(username, room):
+    """Loads the latest proposal."""
     indexlist = list(proposals[room][currturn[room]])
     return printnamelist(indexlist)
 
 @app.route('/voteproposal/<username>/<room>/<vote>')
 def voteproposal(username, room, vote):
+    """Votes for the latest proposal."""
     if not (currturn[room] in votes[room]):
         votes[room][currturn[room]] = dict()
     votes[room][currturn[room]][username] = vote
@@ -185,11 +195,13 @@ def voteproposal(username, room, vote):
 
 @app.route('/loadvotes/<username>/<room>')
 def loadvotes(username, room):
+    """Loads latest vote record."""
     votelist = list(votes[room][currturn[room]])
     return printnamelist(votelist)
 
 @app.route('/act/<username>/<room>/<action>')
 def act(username, room, action):
+    """Acts to pass or fail a task."""
     if not (currturn[room] in acts[room]):
         acts[room][currturn[room]] = dict()
     acts[room][currturn[room]][username] = action
@@ -197,11 +209,13 @@ def act(username, room, action):
 
 @app.route('/loadacts/<username>/<room>')
 def loadacts(username, room):
+    """Loads the latest actions."""
     actlist = list(acts[room][currturn[room]])
     return printnamelist(actlist)
 
 @app.route('/nextturn/<username>/<room>/<turn>')
 def nexturn(username, room, turn):
+    """Jumps to the next turn. If already in a new turn, then do nothing."""
     if not (currturn[room] == turn):
         return "It is already turn " + turn
     currturn[room] = turn
@@ -215,6 +229,7 @@ def printnamelist(namelist):
     return outputstr
 
 def generatecurrentinfo(room):
+    """Generates current room basic info."""
     outputstr = printnamelist(roomuserlisttable[room]) + "||"
     outputstr = outputstr + roomidentitytable[room] + "||"
     outputstr = outputstr + currturn[room] + "||"
