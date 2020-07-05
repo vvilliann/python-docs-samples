@@ -91,7 +91,7 @@ def helloguys():
 def registeruser(username, nickname, room):
     """Return an existing room information."""
     usertable[username] = nickname
-    if (roommembertable.contains_key(room)):
+    if (room in roommembertable):
         if (len(roommembertable[room]) == len(configtable[room]) - 1):
             return "room full!"
         roommembertable[room].add(username)
@@ -105,7 +105,7 @@ def registeruser(username, nickname, room):
 def registerroom(username, nickname, room, config):
     """Returns whether room is available."""
     usertable[username] = nickname
-    if (roommembertable.contains_key(room) and roomstatus[room] == "in game"):
+    if (room in roommembertable and roomstatus[room] == "in game"):
         return "room " + room + " is not available!"
     roommembertable[room] = {}
     roommembertable[room].add(username)
@@ -176,7 +176,7 @@ def loadproposal(username, room):
 
 @app.route('/voteproposal/<username>/<room>/<vote>')
 def voteproposal(username, room, vote):
-    if not (votes[room].contains_key([currturn[room]])):
+    if not (currturn[room] in votes[room]):
         votes[room][currturn[room]] = dict()
     votes[room][currturn[room]][username] = vote
     return "vote submitted!"
@@ -188,7 +188,7 @@ def loadvotes(username, room):
 
 @app.route('/act/<username>/<room>/<action>')
 def act(username, room, action):
-    if not (acts[room].contains_key([currturn[room]])):
+    if not (currturn[room] in acts[room]):
         acts[room][currturn[room]] = dict()
     acts[room][currturn[room]][username] = action
 
