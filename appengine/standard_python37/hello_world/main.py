@@ -114,7 +114,7 @@ def registerroom(username, nickname, room, config):
 @app.route('/startgame/<username>/<room>')
 def startgame(username, room):
     """Starts a game. Enters into game page."""
-    if (roomstatus[room] != "in game")
+    if (roomstatus[room] != "in game"):
         roomstatus[room] = "in game"
         # Initialize the game setup
         # Initialize the seats
