@@ -21,7 +21,7 @@ import random
 app = Flask(__name__)
 
 roommembertable = {
-    "reserved": {}
+    "reserved": set()
 }
 
 roomidentitytable = {
@@ -62,7 +62,7 @@ roomstatus = {
 }
 
 proposals = {
-    "reserved": {0 : {}}
+    "reserved": {0 : set()}
 }
 
 votes = {
@@ -107,7 +107,7 @@ def registerroom(username, nickname, room, config):
     usertable[username] = nickname
     if (room in roommembertable and roomstatus[room] == "in game"):
         return "room " + room + " is not available!"
-    roommembertable[room] = {}
+    roommembertable[room] = set()
     roommembertable[room].add(username)
     roomstatus[room] = "available"
     
@@ -154,7 +154,7 @@ def getgameinfo(username, room):
 
 @app.route('/propose/<username>/<room>/<index1>/<index2>/<index3>/<index4>/<index5>/<index6>/<index7>')
 def propose(username, room, index1, index2, index3, index4, index5, index6, index7):
-    proposed[room][currturn[room]] = {}
+    proposed[room][currturn[room]] = set()
     proposed[room][currturn[room]].add(index1)
     proposed[room][currturn[room]].add(index2)
     if (index3 > -1):
