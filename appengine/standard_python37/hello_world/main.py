@@ -33,7 +33,7 @@ roomuserlisttable = {
 }
 
 currturn = {
-    "reserved": "0-0"
+    "reserved": 0
 }
 
 currlady = {
@@ -59,6 +59,22 @@ configtable = {
 # status code: available/ready(to join)/in game/finished
 roomstatus = {
     "reserved": "available"
+}
+
+proposals = {
+    "reserved": {0 : {}}
+}
+
+votes = {
+    "reserved": {0 : dict(), 1 : dict(), 2 : dict(), 3 : dict(), 4 : dict(),
+                 5 : dict(), 6 : dict(), 7 : dict(), 8 : dict(), 9 : dict(),
+                 10 : dict(), 11 : dict(), 12 : dict(), 13 : dict(), 14 : dict(),
+                 15 : dict(), 16 : dict(), 17 : dict(), 18 : dict(), 19 : dict(),
+                 20 : dict(), 21 : dict(), 22 : dict(), 23 : dict(), 24 : dict(), 25 : dict()}
+}
+
+acts = {
+    "reserved": {0: dict(), 1 : dict(), 2 : dict(), 3 : dict(), 4 : dict(), 5 : dict()}
 }
 
 @app.route('/yin')
@@ -120,14 +136,74 @@ def startgame(username, room):
             configstr.replace(configstr[randindex], '')
             currsize--
         # Initialize the turn counter
-        currturn[room] = "1-1"
+        currturn[room] = 1
         # Initialize the lake lady
         if (configstr[0] == 'K'):
             currlady[room] = roomuserlisttable[room][len(roomuserlisttable[room]) - 1]
         else:
             currlady[room] = "nobody"
+        # Initialize the proposal, vote and action struct
+        proposals[room] = dict()
+        votes[room] = dict()
+        acts[room] = dict()
     return generatecurrentinfo(room)
 
+@app.route('/getgameinfo/<username>/<room>')
+def getgameinfo(username, room):
+    return generatecurrentinfo(room)
+
+@app.route('/propose/<username>/<room>/<index1>/<index2>/<index3>/<index4>/<index5>/<index6>/<index7>')
+def propose(username, room, index1, index2, index3, index4, index5, index6, index7):
+    proposed[room][currturn[room]] = {}
+    proposed[room][currturn[room]].add(index1)
+    proposed[room][currturn[room]].add(index2)
+    if (index3 > -1):
+        proposed[room][currturn[room]].add(index3)
+    if (index4 > -1):
+        proposed[room][currturn[room]].add(index4)
+    if (index5 > -1):
+        proposed[room][currturn[room]].add(index5)
+    if (index6 > -1):
+        proposed[room][currturn[room]].add(index6)
+    if (index7 > -1):
+        proposed[room][currturn[room]].add(index7)
+    return "proposal submitted!"
+
+@app.route('/loadproposal/<username>/<room>')
+def loadproposal(username, room):
+    indexlist = list(proposals[room][currturn[room]])
+    return printnamelist(indexlist)
+
+@app.route('/voteproposal/<username>/<room>/<vote>')
+def voteproposal(username, room, vote)
+    if not (votes[room].contains_key([currturn[room]])):
+        votes[room][currturn[room]] = dict()
+    votes[room][currturn[room]][username] = vote
+    return "vote submitted!"
+
+@app.route('/loadvotes/<username>/<room>')
+def loadvotes(username, room):
+    votelist = list(votes[room][currturn[room]])
+    return printnamelist(votelist)
+
+@app.route('/act/<username>/<room>/<action>')
+def act(username, room, action):
+    if not (acts[room].contains_key([currturn[room]])):
+        acts[room][currturn[room]] = dict()
+    acts[room][currturn[room]][username] = action
+
+@app.route('/loadacts/<username>/<room>')
+def loadacts(username, room):
+    actlist = list(acts[room][currturn[room]])
+    return printnamelist(actlist)
+
+@app.route('/nextturn/<username>/<room>/<turn>')
+def nexturn(username, room, turn):
+    if not (currturn[room] == turn):
+        return "It is already turn " + turn
+    currturn[room] = turn
+    return "Now on turn " + turn
+    
 def printnamelist(namelist):
     """Given a list of name, return a single string with | as spliter."""
     outputstr = ""
