@@ -88,6 +88,9 @@ lancelotcards = {
     "reserved": "1000100"
 }
 
+# Total room number
+totalroomnum = 12
+
 @app.route('/yin')
 def hellomaster():
     """Returns a friendly HTTP greeting."""
@@ -250,6 +253,26 @@ def killmerlin(username, room, merlin):
 def getlancelotcards(room):
     """Gets Lancelot cards, reveal if they are switched or not."""
     return lancelotcards[room]
+
+@app.route('/getallavailablerooms')
+def getallavailablerooms():
+    """Gets all available rooms."""
+    allrooms = ""
+    for roomnum in range(totalroomnumber):
+        roomname = "room{}".format(roomnum) 
+        if !(roomname in roomstatus):
+            // Means it has not been created so you can use
+            allrooms = allrooms + "Y"
+        else if (roomstatus == "available" || roomstatus == "finished"):
+            // Means it is available to host a new game
+            allrooms = allrooms + "Y"
+        else if (roomstatus == "ready"):
+            // Means you cannot create new rule but can join as guest
+            allrooms = allrooms + "R"
+        else:
+            // Means you cannot use it
+            allrooms = allrooms + "N"
+    return allrooms
 
 def printnamelist(namelist):
     """Given a list of name, return a single string with | as spliter."""
