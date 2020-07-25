@@ -260,7 +260,7 @@ def getallavailablerooms():
     allrooms = ""
     for roomnum in range(totalroomnumber):
         roomname = "room{}".format(roomnum) 
-        if !(roomname in roomstatus):
+        if (roomname not in roomstatus):
             // Means it has not been created so you can use
             allrooms = allrooms + "Y"
         else if (roomstatus == "available" || roomstatus == "finished"):
