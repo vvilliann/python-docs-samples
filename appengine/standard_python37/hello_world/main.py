@@ -263,10 +263,10 @@ def getallavailablerooms():
         if (roomname not in roomstatus):
             # Means it has not been created so you can use
             allrooms = allrooms + "Y"
-        else if (roomstatus == "available" || roomstatus == "finished"):
+        elif (roomstatus == "available" or roomstatus == "finished"):
             # Means it is available to host a new game
             allrooms = allrooms + "Y"
-        else if (roomstatus == "ready"):
+        elif (roomstatus == "ready"):
             # Means you cannot create new rule but can join as guest
             allrooms = allrooms + "R"
         else:
