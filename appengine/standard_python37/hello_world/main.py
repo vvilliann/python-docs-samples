@@ -261,16 +261,16 @@ def getallavailablerooms():
     for roomnum in range(totalroomnumber):
         roomname = "room{}".format(roomnum) 
         if (roomname not in roomstatus):
-            // Means it has not been created so you can use
+            # Means it has not been created so you can use
             allrooms = allrooms + "Y"
         else if (roomstatus == "available" || roomstatus == "finished"):
-            // Means it is available to host a new game
+            # Means it is available to host a new game
             allrooms = allrooms + "Y"
         else if (roomstatus == "ready"):
-            // Means you cannot create new rule but can join as guest
+            # Means you cannot create new rule but can join as guest
             allrooms = allrooms + "R"
         else:
-            // Means you cannot use it
+            # Means you cannot use it
             allrooms = allrooms + "N"
     return allrooms
 
