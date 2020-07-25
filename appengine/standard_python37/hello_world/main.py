@@ -258,7 +258,7 @@ def getlancelotcards(room):
 def getallavailablerooms():
     """Gets all available rooms."""
     allrooms = ""
-    for roomnum in range(totalroomnumber):
+    for roomnum in range(totalroomnum):
         roomname = "room{}".format(roomnum) 
         if (roomname not in roomstatus):
             # Means it has not been created so you can use
