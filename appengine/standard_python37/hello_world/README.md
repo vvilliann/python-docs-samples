@@ -30,3 +30,33 @@ The game can do a query every second
 5, Start game
 /startgame/<username>/<room>
 The game will start, only host can start the game
+This will return the game info in such format:
+    username1^nickname1||username2^nickname2||OMPAYYG||currturn||currlady[room]||otherinfo     
+
+6, Each user get the identity information from:
+/getgameinfo/<username>/<room>
+
+7, Client start to give a proposal (only those in their turn):
+/propose/<username>/<room>/<index1>/<index2>/<index3>/<index4>/<index5>/<index6>/<index7>
+All the clients in game load proposal result every second using:
+/loadproposal/<username>/<room>
+with output of indexes of selected players
+
+8, Users start to vote for the proposal:
+/voteproposal/<username>/<room>/<vote>
+All the clients in game load vote result every second using:
+/loadvotes/<username>/<room>
+
+9, Do the task:
+/act/<username>/<room>/<action>
+  
+10, Load the act result:
+/loadacts/<username>/<room>
+  
+11, Next turn:
+/nextturn/<username>/<room>/<turn>
+Automatically called after all the votes completed
+
+12, Kill Merlin:
+/killmerlin/<username>/<room>/<merlin>
+
