@@ -278,7 +278,10 @@ def printnamelist(namelist):
     """Given a list of name, return a single string with | as spliter."""
     outputstr = ""
     for name in namelist:
-        outputstr = outputstr + name + "|"
+        if (name not in usertable):
+            outputstr = outputstr + name + "^ |"
+        else:
+            outputstr = outputstr + name + "^" + usertable[name] + "|"
     return outputstr
 
 def generatecurrentinfo(room):
