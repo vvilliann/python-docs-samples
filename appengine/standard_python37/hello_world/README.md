@@ -15,10 +15,18 @@ Note:
 At the same time, host also register user's name
 /registeruser/<username>/<nickname>/<room>
 Note:
-  Most of the things are the same with above.
-  The only trick is the user may use this method to override his nickname
+  Most of the definition of inputs/outputs are the same with above.
+  Users may use this method to override his nickname.
 
-3, Client choose a room, and send request to join:
+3, Non-host client choose a room, and send request to join:
 (Only for room that is hosted, which made the host "Ready")
 /registeruser/<username>/<nickname>/<room>
 which is same as above
+
+4, Client query current status of the game:
+/getgameinfo/<username>/<room>
+The game can do a query every second
+
+5, Start game
+/startgame/<username>/<room>
+The game will start, only host can start the game
