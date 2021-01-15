@@ -53,62 +53,62 @@ def login():
       password = request.form['password']
       if (user in usertable):
           if (usertable[user] != password):
-              return render_template('index.html', word="", randomseed=0, user="Login fail!", password="Password wrong!")
+              return render_template('index.html', word="", randomseed=0, user="Login fail!", password="Password wrong!", peoplenum=peoplenum)
       else:
           usertable[user] = password
-      return render_template('index.html', word="", randomseed=0, user=user, password=password)
+      return render_template('index.html', word="", randomseed=0, user=user, password=password, peoplenum=peoplenum)
    else:
       user = request.args['name']
       password = request.args['password']
       if (user in usertable):
           if (usertable[user] != password):
-              return render_template('index.html', word="", randomseed=0, user="Login fail!", password="Password wrong!")
+              return render_template('index.html', word="", randomseed=0, user="Login fail!", password="Password wrong!", peoplenum=peoplenum)
       else:
           usertable[user] = password
-      return render_template('index.html', word="", randomseed=0, user=user, password=password)
+      return render_template('index.html', word="", randomseed=0, user=user, password=password, peoplenum=peoplenum)
 
 @app.route('/setupgame/<user>/<password>', methods=['POST'])
 def setupgame(user, password):
     if (user in usertable):
           if (usertable[user] != password):
-              return render_template('index.html', word="", randomseed=0, user="Login fail!", password="Password wrong!")
+              return render_template('index.html', word="", randomseed=0, user="Login fail!", password="Password wrong!", peoplenum=peoplenum)
     else:
-        return render_template('index.html', word="", randomseed=0, user="Login fail!", password="User not exist!")
+        return render_template('index.html', word="", randomseed=0, user="Login fail!", password="User not exist!", peoplenum=peoplenum)
     
     peoplenum = request.form['peoplenum']
     # [END submitted]
     # [START render_template]
-    return render_template('index.html', word="", randomseed=0, user=user, password=password)
+    return render_template('index.html', word="", randomseed=0, user=user, password=password, peoplenum=peoplenum)
     # [END render_template]
 
 @app.route('/receiveword/<user>/<password>', methods=['POST'])
 def receiveword(user, password):
     if (user in usertable):
           if (usertable[user] != password):
-              return render_template('index.html', word="", randomseed=0, user="Login fail!", password="Password wrong!")
+              return render_template('index.html', word="", randomseed=0, user="Login fail!", password="Password wrong!", peoplenum=peoplenum)
     else:
-        return render_template('index.html', word="", randomseed=0, user="Login fail!", password="User not exist!")
+        return render_template('index.html', word="", randomseed=0, user="Login fail!", password="User not exist!", peoplenum=peoplenum)
     word = "小米"
     randomseed = 100
     
     # [END submitted]
     # [START render_template]
-    return render_template('index.html', word=word, randomseed=randomseed, user=user, password=password)
+    return render_template('index.html', word=word, randomseed=randomseed, user=user, password=password, peoplenum=peoplenum)
     # [END render_template]
 
 @app.route('/changeword/<user>/<password>', methods=['POST'])
 def changeword(user, password):
     if (user in usertable):
           if (usertable[user] != password):
-              return render_template('index.html', word="", randomseed=0, user="Login fail!", password="Password wrong!")
+              return render_template('index.html', word="", randomseed=0, user="Login fail!", password="Password wrong!", peoplenum=peoplenum)
     else:
-        return render_template('index.html', word="", randomseed=0, user="Login fail!", password="User not exist!")
+        return render_template('index.html', word="", randomseed=0, user="Login fail!", password="User not exist!", peoplenum=peoplenum)
     word = "大米"
     randomseed = 200
     
     # [END submitted]
     # [START render_template]
-    return render_template('index.html', word=word, randomseed=randomseed, user=user, password=password)
+    return render_template('index.html', word=word, randomseed=randomseed, user=user, password=password, peoplenum=peoplenum)
     # [END render_template]
 
 if __name__ == '__main__':
