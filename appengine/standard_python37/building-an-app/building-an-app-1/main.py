@@ -44,6 +44,14 @@ def form():
     return render_template('index.html')
 # [END form]
 
+@app.route('/login',methods = ['POST', 'GET'])
+def login():
+   if request.method == 'POST':
+      user = request.form['name']
+      return render_template('index.html', word="", randomseed=0, user=user)
+   else:
+      user = request.args.get('name')
+      return render_template('index.html', word="", randomseed=0, user=user)
 
 @app.route('/receiveword/<color>/<password>/<numpeople>', methods=['POST'])
 def receiveword(color, password, numpeople):
