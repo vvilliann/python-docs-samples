@@ -67,12 +67,18 @@ def login():
           usertable[user] = password
       return render_template('index.html', word="", randomseed=0, user=user, password=password)
 
-@app.route('/setupgame', methods=['POST'])
-def setupgame():
+@app.route('/setupgame/<user>/<password>', methods=['POST'])
+def setupgame(user, password):
+    if (user in usertable):
+          if (usertable[user] != password):
+              return render_template('index.html', word="", randomseed=0, user="Login fail!", password="Password wrong!")
+    else:
+        return render_template('index.html', word="", randomseed=0, user="Login fail!", password="User not exist!")
+    
     peoplenum = request.form['peoplenum']
     # [END submitted]
     # [START render_template]
-    return render_template('index.html', word="", randomseed=0)
+    return render_template('index.html', word="", randomseed=0, user=user, password=password)
     # [END render_template]
 
 @app.route('/receiveword/<user>/<password>', methods=['POST'])
