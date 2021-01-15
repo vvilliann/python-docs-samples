@@ -77,8 +77,6 @@ def setupgame():
 
 @app.route('/receiveword/<user>/<password>', methods=['POST'])
 def receiveword(user, password):
-    user = request.form['name']
-    password = request.form['password']
     if (user in usertable):
           if (usertable[user] != password):
               return render_template('index.html', word="", randomseed=0, user="Login fail!", password="Password wrong!")
@@ -94,8 +92,6 @@ def receiveword(user, password):
 
 @app.route('/changeword/<user>/<password>', methods=['POST'])
 def changeword(user, password):
-    user = request.form['name']
-    password = request.form['password']
     if (user in usertable):
           if (usertable[user] != password):
               return render_template('index.html', word="", randomseed=0, user="Login fail!", password="Password wrong!")
