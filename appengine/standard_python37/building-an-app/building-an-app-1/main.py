@@ -41,7 +41,7 @@ def root():
 
 @app.route('/form')
 def form():
-    return render_template('form.html')
+    return render_template('index.html')
 # [END form]
 
 
@@ -53,7 +53,7 @@ def requestword():
     # [END submitted]
     # [START render_template]
     return render_template(
-        'form.html',
+        'index.html',
         word=word,
         randomseed=randomseed)
     # [END render_template]
