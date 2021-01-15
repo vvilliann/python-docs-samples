@@ -48,13 +48,32 @@ def form():
 def login():
    if request.method == 'POST':
       user = request.form['name']
-      return render_template('index.html', word="", randomseed=0, user=user)
+      password = request.form['password']
+      if (user in usertable):
+          if (usertable[user] != password):
+              return render_template('index.html', word="", randomseed=0, user="Login fail!", password="Password wrong!")
+      else:
+          usertable[user] = password
+      return render_template('index.html', word="", randomseed=0, user=user, password=password)
    else:
       user = request.args.get('name')
-      return render_template('index.html', word="", randomseed=0, user=user)
+      password = request.form['password']
+      if (user in usertable):
+          if (usertable[user] != password):
+              return render_template('index.html', word="", randomseed=0, user="Login fail!", password="Password wrong!")
+      else:
+          usertable[user] = password
+      return render_template('index.html', word="", randomseed=0, user=user, password=password)
 
-@app.route('/receiveword/<color>/<password>/<numpeople>', methods=['POST'])
-def receiveword(color, password, numpeople):
+@app.route('/receiveword', methods=['POST'])
+def receiveword():
+    user = request.form['name']
+    password = request.form['password']
+    if (user in usertable):
+          if (usertable[user] != password):
+              return render_template('index.html', word="", randomseed=0, user="Login fail!", password="Password wrong!")
+    else:
+        return render_template('index.html', word="", randomseed=0, user="Login fail!", password="User not exist!")
     word = "小米"
     randomseed = 0
     
@@ -63,7 +82,9 @@ def receiveword(color, password, numpeople):
     return render_template(
         'index.html',
         word=word,
-        randomseed=randomseed)
+        randomseed=randomseed,
+        user=user,
+        password=password)
     # [END render_template]
 
 if __name__ == '__main__':
