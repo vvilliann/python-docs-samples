@@ -48,6 +48,12 @@
 <button class="button button9">Orange</button>
 <button class="button button10">Yellow</button>
 
+<form action = "{{ url_for('login') }}" method = "post">
+         <p>Enter Name:</p>
+         <p><input type = "text" name = "nm" /></p>
+         <p><input type = "submit" value = "submit" /></p>
+</form>
+  
 <p>Click here to receive word:</p>
 
 <button class="button button11" method="post" action="{{ url_for('receiveword/red/password/7') }}">Receive Word</button>
