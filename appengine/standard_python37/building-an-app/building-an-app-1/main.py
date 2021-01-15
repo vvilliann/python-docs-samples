@@ -68,7 +68,7 @@ def login():
       return render_template('index.html', word="", randomseed=0, user=user, password=password)
 
 @app.route('/setupgame', methods=['POST'])
-def receiveword():
+def setupgame():
     peoplenum = request.form['peoplenum']
     # [END submitted]
     # [START render_template]
