@@ -47,18 +47,43 @@
 <button class="button button8">White</button>
 <button class="button button9">Orange</button>
 <button class="button button10">Yellow</button>
+  
+<p>Login here:</p>
 
 <form action = "{{ url_for('login') }}" method = "post">
          <p>Enter Name & Password: </p>
-         <p><input type = "text" name = "your name" /></p>
+         <p><input type = "text" name = "name" /></p>
          <p><input type = "text" name = "password" /></p>
+         <p><input type = "submit" value = "submit" /></p>
+</form>
+
+<p>Your Identity is: {{user}}</p>  
+  
+<p>Set up game here:</p>  
+  
+<form action = "{{ url_for('setupgame') }}" method = "post">
+         <p>Enter Name & Password: </p>
+         <p><input type = "text" name = "peoplenum" /></p>
          <p><input type = "submit" value = "submit" /></p>
 </form>
   
 <p>Click here to receive word:</p>
 
-<button class="button button11" method="post" action="{{ url_for('receiveword/red/password/7') }}">Receive Word</button>
-<button class="button button12">Change Word</button>
+<form action = "{{ url_for('receiveword') }}" method = "post">
+         <p>Enter Name & Password: </p>
+         <p><input type = "text" name = "user" />{{user}}</p>
+         <p><input type = "text" name = "password" />{{password}}</p>
+         <p><input type = "submit" value = "submit" /></p>
+</form>
+
+<p>Click here to reset the word for everyone:</p>
+
+<form action = "{{ url_for('changeword') }}" method = "post">
+         <p>Enter Name & Password: </p>
+         <p><input type = "text" name = "user" />{{user}}</p>
+         <p><input type = "text" name = "password" />{{password}}</p>
+         <p><input type = "submit" value = "submit" /></p>
+</form>
 
 <p>Your word is: {{word}}</p>
 <p>Your random seed is: {{randomseed}}</p>
