@@ -4,15 +4,56 @@
   <title>Datastore and Firebase Auth Example</title>
   <script src="{{ url_for('static', filename='script.js') }}"></script>
   <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  
+  <style>
+.button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button1 {background-color: #4CAF50;} /* Green */
+.button2 {background-color: #008CBA;} /* Blue */
+.button3 {background-color: #CC0F0A;} /* Red */
+.button4 {background-color: #B08CBA;} /* Purple */
+.button5 {background-color: #CC7F80;} /* Pink */
+.button6 {background-color: #B36C2A;} /* Brown */
+.button7 {background-color: #3CBFBA;} /* Cyan */
+.button8 {background-color: #D0DCDA;} /* White */
+.button9 {background-color: #FFA500;} /* Orange */
+.button10 {background-color: #EEDC3A;} /* Yellow */
+.button11 {background-color: #B0BCBA;} /* Receive Word */
+.button12 {background-color: #404C3A;} /* Change Word */
+</style>
+  
 </head>
+  
+
 <body>
+  
+<button class="button button1">Green</button>
+<button class="button button2">Blue</button>
+<button class="button button3">Red</button>
+<button class="button button4">Purple</button>
+<button class="button button5">Pink</button>
+<button class="button button6">Brown</button>
+<button class="button button7">Cyan</button>
+<button class="button button8">White</button>
+<button class="button button9">Orange</button>
+<button class="button button10">Yellow</button>
 
-  <h1>Datastore and Firebase Auth Example</h1>
+<p>Click here to receive word:</p>
 
-  <h2>Last 10 visits</h2>
-  {% for time in times %}
-    <p>{{ time }}</p>
-  {% endfor %}
+<button class="button button11">Receive Word</button>
+<button class="button button12">Change Word</button>
 
+<p>Your word is:</p>
+  
 </body>
 </html>
