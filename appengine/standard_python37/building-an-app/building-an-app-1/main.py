@@ -72,11 +72,11 @@ def setupgame():
     peoplenum = request.form['peoplenum']
     # [END submitted]
     # [START render_template]
-    return render_template('index.html', word="", randomseed=0, user=user, password=password)
+    return render_template('index.html', word="", randomseed=0)
     # [END render_template]
 
-@app.route('/receiveword', methods=['POST'])
-def receiveword():
+@app.route('/receiveword/<user>/<password>', methods=['POST'])
+def receiveword(user, password):
     user = request.form['name']
     password = request.form['password']
     if (user in usertable):
@@ -92,8 +92,8 @@ def receiveword():
     return render_template('index.html', word=word, randomseed=randomseed, user=user, password=password)
     # [END render_template]
 
-@app.route('/changeword', methods=['POST'])
-def changeword():
+@app.route('/changeword/<user>/<password>', methods=['POST'])
+def changeword(user, password):
     user = request.form['name']
     password = request.form['password']
     if (user in usertable):
