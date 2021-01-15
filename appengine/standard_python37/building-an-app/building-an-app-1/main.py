@@ -28,6 +28,8 @@ words = [
     "小米"
 ]
 
+peoplenum = 7
+
 @app.route('/')
 def root():
     # For the sake of example, use static information to inflate the template.
@@ -65,6 +67,14 @@ def login():
           usertable[user] = password
       return render_template('index.html', word="", randomseed=0, user=user, password=password)
 
+@app.route('/setupgame', methods=['POST'])
+def receiveword():
+    peoplenum = request.form['peoplenum']
+    # [END submitted]
+    # [START render_template]
+    return render_template('index.html', word="", randomseed=0, user=user, password=password)
+    # [END render_template]
+
 @app.route('/receiveword', methods=['POST'])
 def receiveword():
     user = request.form['name']
@@ -75,16 +85,28 @@ def receiveword():
     else:
         return render_template('index.html', word="", randomseed=0, user="Login fail!", password="User not exist!")
     word = "小米"
-    randomseed = 0
+    randomseed = 100
     
     # [END submitted]
     # [START render_template]
-    return render_template(
-        'index.html',
-        word=word,
-        randomseed=randomseed,
-        user=user,
-        password=password)
+    return render_template('index.html', word=word, randomseed=randomseed, user=user, password=password)
+    # [END render_template]
+
+@app.route('/changeword', methods=['POST'])
+def changeword():
+    user = request.form['name']
+    password = request.form['password']
+    if (user in usertable):
+          if (usertable[user] != password):
+              return render_template('index.html', word="", randomseed=0, user="Login fail!", password="Password wrong!")
+    else:
+        return render_template('index.html', word="", randomseed=0, user="Login fail!", password="User not exist!")
+    word = "大米"
+    randomseed = 200
+    
+    # [END submitted]
+    # [START render_template]
+    return render_template('index.html', word=word, randomseed=randomseed, user=user, password=password)
     # [END render_template]
 
 if __name__ == '__main__':
