@@ -19,6 +19,14 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
+# Username -> nickname dictionary
+usertable = {
+    "defaultusername": "defaultname"
+}
+
+words = [
+    "小米"
+]
 
 @app.route('/')
 def root():
@@ -31,6 +39,24 @@ def root():
 
     return render_template('index.html', times=dummy_times)
 
+@app.route('/form')
+def form():
+    return render_template('form.html')
+# [END form]
+
+
+@app.route('/requestword/<numpeople>/<color>/<password>', methods=['POST'])
+def requestword():
+    word = "小米"
+    randomseed = 0
+    
+    # [END submitted]
+    # [START render_template]
+    return render_template(
+        'form.html',
+        word=word,
+        randomseed=randomseed)
+    # [END render_template]
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
