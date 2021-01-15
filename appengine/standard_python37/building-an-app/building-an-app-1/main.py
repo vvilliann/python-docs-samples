@@ -56,8 +56,8 @@ def login():
           usertable[user] = password
       return render_template('index.html', word="", randomseed=0, user=user, password=password)
    else:
-      user = request.args.get('name')
-      password = request.form['password']
+      user = request.args['name']
+      password = request.args['password']
       if (user in usertable):
           if (usertable[user] != password):
               return render_template('index.html', word="", randomseed=0, user="Login fail!", password="Password wrong!")
