@@ -59,30 +59,20 @@
 
 <p>Your Identity is: {{user}}</p>  
   
-<p>Set up game here:</p>  
-  
 <form action = "{{ url_for('setupgame') }}" method = "post">
-         <p>Enter Name & Password: </p>
+         <p>Set up total number of people here: </p>  
          <p><input type = "text" name = "peoplenum" /></p>
          <p><input type = "submit" value = "submit" /></p>
 </form>
-  
-<p>Click here to receive word:</p>
 
-<form action = "{{ url_for('receiveword') }}" method = "post">
-         <p>Enter Name & Password: </p>
-         <p><input type = "text" name = "user" />{{user}}</p>
-         <p><input type = "text" name = "password" />{{password}}</p>
-         <p><input type = "submit" value = "submit" /></p>
+<form action = "{{ url_for('receiveword', user=user, password=password) }}" method = "post">
+         <p>Click here to receive word:</p>
+         <p><input type = "submit" value = "Refresh" /></p>
 </form>
 
-<p>Click here to reset the word for everyone:</p>
-
-<form action = "{{ url_for('changeword') }}" method = "post">
-         <p>Enter Name & Password: </p>
-         <p><input type = "text" name = "user" />{{user}}</p>
-         <p><input type = "text" name = "password" />{{password}}</p>
-         <p><input type = "submit" value = "submit" /></p>
+<form action = "{{ url_for('changeword', user=user, password=password) }}" method = "post">
+         <p>Click here to reset the word for everyone: </p>
+         <p><input type = "submit" value = "Change A Word" /></p>
 </form>
 
 <p>Your word is: {{word}}</p>
