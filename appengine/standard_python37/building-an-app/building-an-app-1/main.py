@@ -45,8 +45,8 @@ def form():
 # [END form]
 
 
-@app.route('/requestword/<numpeople>/<color>/<password>', methods=['POST'])
-def requestword():
+@app.route('/receiveword/<numpeople>/<color>/<password>', methods=['POST'])
+def receiveword():
     word = "小米"
     randomseed = 0
     
