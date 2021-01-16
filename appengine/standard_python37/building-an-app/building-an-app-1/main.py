@@ -164,7 +164,7 @@ def receiveword(user, password, randomseed):
         identity_table[user] = identity[len(identity_table) - 1]
     
     your_identity = identity_table[user]
-    word = words[randomseed][your_identity]
+    word = words[int(randomseed)][your_identity]
     
     # [END submitted]
     # [START render_template]
