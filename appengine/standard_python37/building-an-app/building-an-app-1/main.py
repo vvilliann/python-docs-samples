@@ -56,6 +56,10 @@ words = [
     ["石膏", "大理石"],
     ["维纳斯", "雅典娜"],
     ["吸血鬼", "蚊子"],
+    ["诸葛亮", "孙权"],
+    ["《What does the fox say》", "《江南》"],
+    ["一夜狼人", "剧本杀"],
+    ["罗密欧", "高帅富"]
 ]
 
 identity = [0, 1] # 1 is spy, 0 is normal, 2 is idiot
@@ -113,8 +117,8 @@ def setupgame(user, password):
     else:
         return render_template('index.html', word="", randomseed=0, user="Login fail!", password="User not exist!", peoplenum=peoplenum)
     
-    peoplenum = request.form['peoplenum']
-    spynum = request.form['spynum']
+    peoplenum = int(request.form['peoplenum'])
+    spynum = int(request.form['spynum'])
     currsize = len(words)
     seed = random.randint(0, currsize - 1)
     
