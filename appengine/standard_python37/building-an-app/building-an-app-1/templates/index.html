@@ -68,7 +68,7 @@
 
 <p>总玩家数: {{peoplenum}}; 卧底数：{{spynum}}.</p>
   
-<form action = "{{ url_for('receiveword', user=user, password=password) }}" method = "post">
+<form action = "{{ url_for('receiveword', user=user, password=password, randomseed=randomseed) }}" method = "post">
          <p>点此接收词/Click here to receive word:</p>
          <p><input type = "submit" value = "Refresh" /></p>
 </form>
