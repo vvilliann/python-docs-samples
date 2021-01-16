@@ -90,7 +90,7 @@ def login():
       user = request.form['name']
       password = request.form['password']
       if (user in usertable):
-          if (usertable[user] != password):
+          if not (usertable[user] == password):
               return render_template('index.html', word="", randomseed=seed, user="Login fail!", password="Password wrong!", peoplenum=peoplenum)
       else:
           usertable[user] = password
@@ -99,7 +99,7 @@ def login():
       user = request.args['name']
       password = request.args['password']
       if (user in usertable):
-          if (usertable[user] != password):
+          if not (usertable[user] == password):
               return render_template('index.html', word="", randomseed=seed, user="Login fail!", password="Password wrong!", peoplenum=peoplenum)
       else:
           usertable[user] = password
@@ -108,7 +108,7 @@ def login():
 @app.route('/setupgame/<user>/<password>', methods=['POST'])
 def setupgame(user, password):
     if (user in usertable):
-          if (usertable[user] != password):
+          if not (usertable[user] == password):
               return render_template('index.html', word="", randomseed=0, user="Login fail!", password="Password wrong!", peoplenum=peoplenum)
     else:
         return render_template('index.html', word="", randomseed=0, user="Login fail!", password="User not exist!", peoplenum=peoplenum)
@@ -123,7 +123,7 @@ def setupgame(user, password):
     identity_table = {}
     for iter in range(spynum):
         humanseed = random.randint(0, peoplenum - 1)
-        while (identity[humanseed] != 0):
+        while not (identity[humanseed] == 0):
             humanseed = random.randint(0, peoplenum - 1)
         identity[humanseed] = 1
     
@@ -136,12 +136,12 @@ def setupgame(user, password):
 @app.route('/receiveword/<user>/<password>', methods=['POST'])
 def receiveword(user, password):
     if (user in usertable):
-          if (usertable[user] != password):
+          if not (usertable[user] == password):
               return render_template('index.html', word="", randomseed=0, user="Login fail!", password="Password wrong!", peoplenum=peoplenum)
     else:
         return render_template('index.html', word="", randomseed=0, user="Login fail!", password="User not exist!", peoplenum=peoplenum)
     
-    if !(user in identity_table):
+    if not (user in identity_table):
         identity_table[user] = identity[len(identity_table) - 1]
     
     your_identity = identity_table[user]
@@ -155,7 +155,7 @@ def receiveword(user, password):
 @app.route('/changeword/<user>/<password>', methods=['POST'])
 def changeword(user, password):
     if (user in usertable):
-          if (usertable[user] != password):
+          if not (usertable[user] == password):
               return render_template('index.html', word="", randomseed=0, user="Login fail!", password="Password wrong!", peoplenum=peoplenum)
     else:
         return render_template('index.html', word="", randomseed=0, user="Login fail!", password="User not exist!", peoplenum=peoplenum)
@@ -165,10 +165,10 @@ def changeword(user, password):
     identity_table = {}
     for iter in range(spynum):
         humanseed = random.randint(0, peoplenum - 1)
-        while (identity[humanseed] != 0):
+        while not (identity[humanseed] == 0):
             humanseed = random.randint(0, peoplenum - 1)
         identity[humanseed] = 1
-    if !(user in identity_table):
+    if not (user in identity_table):
         identity_table[user] = identity[len(identity_table) - 1]
     
     your_identity = identity_table[user]
