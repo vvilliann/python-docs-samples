@@ -59,7 +59,23 @@ words = [
     ["诸葛亮", "孙权"],
     ["《What does the fox say》", "《江南》"],
     ["一夜狼人", "剧本杀"],
-    ["罗密欧", "高帅富"]
+    ["罗密欧", "高帅富"],
+    ["马卡龙", "提拉米苏"],
+    ["肠粉", "煲仔饭"],
+    ["澳门", "大西洋城"],
+    ["古驰Gucci", "香奈儿Channel"],
+    ["蚕蛾", "蚕茧"],
+    ["指挥棒", "长笛"],
+    ["杨玉环", "王昭君"],
+    ["纽约时报", "卫报"],
+    ["华陈鹤立", "司马相如"],
+    ["人妖", "太监"],
+    ["Python", "Javascript"],
+    ["猎豹", "鬣狗"],
+    ["非洲", "埃及"],
+    ["复活节", "愚人节"],
+    ["美人鱼", "半人马"],
+    ["天皇", "沙皇"]
 ]
 
 identity = [0, 1] # 1 is spy, 0 is normal, 2 is idiot
@@ -131,7 +147,6 @@ def setupgame(user, password):
             humanseed = random.randint(0, peoplenum - 1)
         identity[humanseed] = 1
     
-    seed_human = random.randint()
     # [END submitted]
     # [START render_template]
     return render_template('index.html', word="", randomseed=seed, user=user, password=password, peoplenum=peoplenum)
