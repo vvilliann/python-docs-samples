@@ -179,6 +179,9 @@ def changeword(user, password):
     else:
         return render_template('index.html', word="", randomseed=0, user="Login fail!", password="User not exist!", peoplenum=peoplenum)
     
+    currsize = len(words)
+    seed = random.randint(0, currsize - 1)
+    
     # Set up identity
     identity = [0] * (peoplenum + 10)
     identity_table = {}
