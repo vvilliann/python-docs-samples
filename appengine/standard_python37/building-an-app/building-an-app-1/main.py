@@ -168,7 +168,7 @@ def receiveword(user, password, randomseed):
     
     # [END submitted]
     # [START render_template]
-    return render_template('index.html', word=word, randomseed=randomseed, user=user, password=password, peoplenum=peoplenum, spynum=spynum)
+    return render_template('index.html', word=word, randomseed=int(randomseed), user=user, password=password, peoplenum=peoplenum, spynum=spynum)
     # [END render_template]
 
 @app.route('/changeword/<user>/<password>', methods=['POST'])
