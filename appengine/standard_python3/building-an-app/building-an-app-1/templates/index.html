@@ -1,18 +1,28 @@
 <!doctype html>
 <html>
 <head>
-  <title>Datastore and Firebase Auth Example</title>
+  <title>Java Data Structure Visualizer</title>
   <script src="{{ url_for('static', filename='script.js') }}"></script>
   <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-  <h1>Datastore and Firebase Auth Example</h1>
+  <h1>Input Your Java Code Here: </h1>
 
-  <h2>Last 10 visits</h2>
-  {% for time in times %}
-    <p>{{ time }}</p>
-  {% endfor %}
+  <textarea id="usercode" rows="30" cols="80">
+      // Please type your Java function below:
+  </textarea>
 
+  <br>
+
+  <input type="submit" value="Submit">
+
+  <br>
+
+  <p id="submitguide">Click the "Submit" button to generate the animation.</p>
+  
+  <img src="/image/pokemon_PNG78.png" width="60" height="100">
+  
 </body>
 </html>
+
