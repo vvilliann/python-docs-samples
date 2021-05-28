@@ -33,7 +33,7 @@ def root():
 
 @app.route('/submit', methods=['POST'])
 def submit_textarea():
-    return "You entered: {}".format(request.form["text"])
+    return "You entered: {}".format(request.form["usercode"])
 
 
 if __name__ == '__main__':
