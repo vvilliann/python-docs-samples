@@ -14,6 +14,7 @@
 
 # [START gae_python38_render_template]
 import datetime
+import re
 
 from flask import Flask, render_template, request
 
@@ -34,7 +35,6 @@ def root():
 @app.route('/submit', methods=['POST'])
 def submit_textarea():
     return "You entered: {}".format(request.form["usercode"])
-
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
