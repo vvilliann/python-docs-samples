@@ -32,7 +32,7 @@ def root():
 
     return render_template('index.html', times=dummy_times)
 
-@app.route('/submit', method=['POST'])
+@app.route('/submit', methods=['POST'])
 def submit_textarea():
     return "You entered: {}".format(request.form["usercode"])
 
