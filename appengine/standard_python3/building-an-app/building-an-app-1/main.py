@@ -36,6 +36,18 @@ def root():
 def submit_textarea():
     return "You entered: {}".format(request.form["usercode"])
 
+def findIntDefiniation(input_str):
+    p = re.compile(r'int \w+ = \d+;')
+    m = p.match(input_str)
+    if m == None:
+        return "", -1
+    p1 = re.compile(r'=')
+    m1 = p1.search(input_str)
+    equal_index = m1.start()
+    variable = input_str[4:equal_index-1]
+    init_value = input_str[equal_index+2:input_str.len()-1]
+    return variable, init_value
+
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
     # Engine, a webserver process such as Gunicorn will serve the app. This
