@@ -43,6 +43,7 @@ def operator(input_str):
     code_in_for_loop = ""
     target_iter = 1
     iter_value = -1
+    global variable_dict
     for line in input_str.split('\n'):
         variable, init_value = findIntDefinition(line)
         loop_iter = findForLoop(line)
@@ -62,16 +63,17 @@ def operator(input_str):
             iter_value = -1
         elif (iter_value > -1):
             code_in_for_loop += line + "\n"
-        elif (plus != "" && plus in variable_dict):
-            variable_dict[plus]++
+        elif (plus != "" and plus in variable_dict):
+            variable_dict[plus] = variable_dict[plus] + 1
             reporter()
             
 
 def reporter():
-    log += "===========================================\n"
+    global log
+    log = log + "===========================================\n"
     for variable in variable_dict:
-        log += "|" + variable + "|\n"
-    log += "===========================================\n"
+        log = log + "|" + variable + "|\n"
+    log = log + "===========================================\n"
 
 def findIntDefinition(input_str):
     p = re.compile(r'int \w+ = \d+;')
