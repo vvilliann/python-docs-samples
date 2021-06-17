@@ -46,7 +46,21 @@ def findIntDefinition(input_str):
     equal_index = m1.start()
     variable = input_str[4:equal_index-1]
     init_value = input_str[equal_index+2:len(input_str)-1]
-    return variable, init_value
+    return variable, int(init_value)
+
+def findForLoop(input_str):
+    p = re.compile(r'for (int \w+ = 0; \w+ < \d+; \w+\+\+) {')
+    m = p.match(input_str)
+    if m == None:
+        return -1
+    p1 = re.compile(r'<')
+    m1 = p1.search(input_str)
+    pointer1_index = m1.end()
+    p2 = re.compile(r'; \w+\+\+)')
+    m2 = p2.search(input_str)
+    pointer2_index = m2.start()
+    iter_value = input_str[pointer1_index+1:pointer2_index]
+    return int(iter_value)
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
