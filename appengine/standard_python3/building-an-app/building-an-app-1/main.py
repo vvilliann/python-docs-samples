@@ -36,7 +36,7 @@ def root():
 def submit_textarea():
     return "You entered: {}".format(request.form["usercode"])
 
-def findIntDefiniation(input_str):
+def findIntDefinition(input_str):
     p = re.compile(r'int \w+ = \d+;')
     m = p.match(input_str)
     if m == None:
