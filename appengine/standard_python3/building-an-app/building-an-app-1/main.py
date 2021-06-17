@@ -45,7 +45,7 @@ def findIntDefinition(input_str):
     m1 = p1.search(input_str)
     equal_index = m1.start()
     variable = input_str[4:equal_index-1]
-    init_value = input_str[equal_index+2:input_str.len()-1]
+    init_value = input_str[equal_index+2:len(input_str)-1]
     return variable, init_value
 
 if __name__ == '__main__':
