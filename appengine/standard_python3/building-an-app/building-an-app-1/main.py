@@ -66,7 +66,6 @@ def operator(input_str):
         elif (plus != "" and plus in variable_dict):
             variable_dict[plus] = variable_dict[plus] + 1
             reporter()
-            
 
 def reporter():
     global log
