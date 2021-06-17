@@ -71,7 +71,7 @@ def reporter():
     global log
     log = log + "===========================================\n"
     for variable in variable_dict:
-        log = log + "|" + variable + "|" + str(variable_dict[variable]) + "\n"
+        log = log + "|" + variable + "|" + str(variable_dict[variable]) + "|\n"
     log = log + "===========================================\n"
 
 def findIntDefinition(input_str):
