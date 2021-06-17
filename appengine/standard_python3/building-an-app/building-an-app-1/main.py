@@ -19,7 +19,8 @@ import re
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
-
+variable_dict = {}
+log = ""
 
 @app.route('/')
 def root():
@@ -34,7 +35,43 @@ def root():
 
 @app.route('/submit', methods=['POST'])
 def submit_textarea():
-    return "You entered: {}".format(request.form["usercode"])
+    input_str = request.form["usercode"]
+    operator(input_str)
+    return "Dynamics: \n" + log
+
+def operator(input_str):
+    code_in_for_loop = ""
+    target_iter = 1
+    iter_value = -1
+    for line in input_str.split('\n'):
+        variable, init_value = findIntDefinition(line)
+        loop_iter = findForLoop(line)
+        loop_end = findForLoopEnd(line)
+        plus = findPlusOperation(line)
+        if (variable != ""):
+            variable_dict[variable] = init_value
+            reporter()
+        elif (loop_iter > -1):
+            iter_value = 0
+            target_iter = loop_iter
+        elif (loop_end > -1):
+            for index in range(target_iter):
+                operator(code_in_for_loop)
+            code_in_for_loop = ""
+            target_iter = 1
+            iter_value = -1
+        elif (iter_value > -1):
+            code_in_for_loop += line + "\n"
+        elif (plus != "" && plus in variable_dict):
+            variable_dict[plus]++
+            reporter()
+            
+
+def reporter():
+    log += "===========================================\n"
+    for variable in variable_dict:
+        log += "|" + variable + "|\n"
+    log += "===========================================\n"
 
 def findIntDefinition(input_str):
     p = re.compile(r'int \w+ = \d+;')
@@ -49,18 +86,36 @@ def findIntDefinition(input_str):
     return variable, int(init_value)
 
 def findForLoop(input_str):
-    p = re.compile(r'for (int \w+ = 0; \w+ < \d+; \w+\+\+) {')
+    p = re.compile(r'for \(int \w+ = 0; \w+ < \d+; \w+\+\+\) \{')
     m = p.match(input_str)
     if m == None:
         return -1
     p1 = re.compile(r'<')
     m1 = p1.search(input_str)
     pointer1_index = m1.end()
-    p2 = re.compile(r'; \w+\+\+)')
+    p2 = re.compile(r'; \w+\+\+\)')
     m2 = p2.search(input_str)
     pointer2_index = m2.start()
     iter_value = input_str[pointer1_index+1:pointer2_index]
-    return int(iter_value)
+    return iter_value
+
+def findForLoopEnd(input_str):
+    p = re.compile(r'\}')
+    m = p.match(input_str)
+    if m == None:
+        return -1
+    return 1
+
+def findPlusOperation(input_str):
+    p = re.compile(r'\w+\+\+;')
+    m = p.match(input_str)
+    if m == None:
+        return ""
+    p1 = re.compile(r'\+\+')
+    m1 = p1.search(input_str)
+    plus_index = m1.start()
+    variable = input_str[:plus_index]
+    return variable
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
