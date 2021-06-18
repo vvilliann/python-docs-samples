@@ -82,8 +82,11 @@ def findIntDefinition(input_str):
     p1 = re.compile(r'=')
     m1 = p1.search(input_str)
     equal_index = m1.start()
+    p2 = re.compile(r';')
+    m2 = p2.search(input_str)
+    pointer2_index = m2.start()
     variable = input_str[4:equal_index-1]
-    init_value = input_str[equal_index+2:len(input_str)-1]
+    init_value = input_str[equal_index+2:pointer2_index]
     return variable, int(init_value)
 
 def findForLoop(input_str):
