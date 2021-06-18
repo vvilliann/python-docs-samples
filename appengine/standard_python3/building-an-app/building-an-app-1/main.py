@@ -21,6 +21,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 variable_dict = {}
 log = ""
+history = []
 
 @app.route('/')
 def root():
@@ -37,7 +38,7 @@ def root():
 def submit_textarea():
     input_str = request.form["usercode"]
     operator(input_str)
-    return "Dynamics: \n" + log
+    return render_template('index.html', this_history=history)
 
 def operator(input_str):
     code_in_for_loop = ""
@@ -69,10 +70,12 @@ def operator(input_str):
 
 def reporter():
     global log
+    global history
     log = log + "===========================================\n"
     for variable in variable_dict:
         log = log + "[" + variable + "|" + str(variable_dict[variable]) + "]\n"
     log = log + "===========================================\n"
+    history.append(variable_dict)
 
 def findIntDefinition(input_str):
     p = re.compile(r'int \w+ = \d+;')
