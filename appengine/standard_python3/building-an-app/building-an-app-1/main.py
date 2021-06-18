@@ -98,7 +98,7 @@ def findForLoop(input_str):
     m2 = p2.search(input_str)
     pointer2_index = m2.start()
     iter_value = input_str[pointer1_index+1:pointer2_index]
-    return iter_value
+    return int(iter_value)
 
 def findForLoopEnd(input_str):
     p = re.compile(r'\}')
