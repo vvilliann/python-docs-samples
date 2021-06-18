@@ -25,5 +25,29 @@
   <p id="submitguide">Click the "sumbit" button to generate the animation.</p>
  
  <img src= "/static/pikachu.jpg" width="60" height="100">
+ <img src= "/static/Squirrel-icon.png" width="60" height="100">
+  
+  {% for entry in this_history %}
+      {% for variable in entry %}
+          <div class="row">
+          {% if variable=="pikachu" %}
+              {% for image_appearance in entry[variable] %}
+          <div class="column">
+          <img src= "/static/pikachu.jpg" width="60" height="100">
+          </div>
+              {% endfor %}
+          {% endif %}
+          </div>
+          <div class="row">
+          {% if variable=="turtle" %}
+              {% for image_appearance in entry[variable] %}
+          <div class="column">
+          <img src= "/static/Squirrel-icon.png" width="60" height="100">
+          </div>
+              {% endfor %}
+          {% endif %}
+          </div>
+      {% endfor %}
+  {% endfor %}
 </body>
 </html>
