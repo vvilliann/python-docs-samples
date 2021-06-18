@@ -28,7 +28,7 @@
       {% for variable in entry %}
           <div class="row">
           {% if variable=="pikachu" %}
-              {% for image_appearance in entry[variable] %}
+              {% for image_appearance in range(entry[variable]) %}
           <div class="column">
           <img src="/static/pokemon_PNG78.png" width="60" height="100">
           </div>
@@ -37,7 +37,7 @@
           </div>
           <div class="row">
           {% if variable=="turtle" %}
-              {% for image_appearance in entry[variable] %}
+              {% for image_appearance in range(entry[variable]) %}
           <div class="column">
           <img src="/static/turtle.png" width="60" height="100">
           </div>
